@@ -7,7 +7,7 @@ export const Result = () =>{
     const attempted=confirmedAnswer.length;
     const totalQuestions=currentQuiz.length
     
-    const btnStyle= "m-2 p-2 px-4 rounded flex justify-center relative"
+    const btnStyle= "m-2 p-2 px-4 rounded flex justify-center shadow-inner relative"
     const totalScore = totalQuestions*10
     const scoreCondition = score>0.35*totalScore?" text-blue-400":" text-red-500"
 
