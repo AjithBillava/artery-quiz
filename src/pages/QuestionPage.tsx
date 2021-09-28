@@ -3,9 +3,8 @@ import { Question } from "../components/question/question"
 import { useData } from "../contexts/dataContext"
 
 export const QuestionPage = () => {
-    const {state:{arrayIndex,currentQuiz,selectedAnswer,confirmedAnswer},dataDispatch,checkAnswer} = useData()
-    // console.log(currentQuiz,quizID)
-    const quizLength= currentQuiz.length
+    const {state:{arrayIndex,currentQuiz,selectedAnswer,confirmedAnswer,quizTitle},dataDispatch,checkAnswer} = useData()
+
     useEffect(() => {
         dataDispatch({type:"SET_ARRAY_INDEX",payload:0})
     }, [dataDispatch])
@@ -14,15 +13,13 @@ export const QuestionPage = () => {
         const answers =confirmedAnswer.find(item=>item.questionId===currentQuiz[arrayIndex].id)
         checkAnswer(answers)
     },[confirmedAnswer,arrayIndex,currentQuiz])
-    // useEffect(()=>{
-    //     dataDispatch({type:"SET_SELECTED_ANSWER",payload:""})
-    //     console.log(selectedAnswer)
-    // },[selectedAnswer,dataDispatch])
-
+  
     
     return(
-        <div>
-            <Question questions={ currentQuiz[arrayIndex<quizLength? arrayIndex:quizLength-1]} selectedOption={selectedAnswer} />
+        <div className="flex mt-4 justify-center text-xl md:text-2xl flex-col border-grey border-2 rounded mx-5 xsm:mx-10 sm:mx-20 md:mx-40 lg:mx-60 p-6">
+            <div className="flex justify-center text-3xl md:text-4xl">{quizTitle}</div>
+            
+            <Question questions={ currentQuiz[arrayIndex]} selectedOption={selectedAnswer} />
         </div>
     )
 }

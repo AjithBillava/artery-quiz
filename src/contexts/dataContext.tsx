@@ -2,18 +2,14 @@ import  React, { createContext, useContext, useReducer } from "react";
 import { ACTONTYPE, initialState, initialStateType, reducer } from "../reducer/dataReducer";
 import { Answer, QuestionType } from "../types/quiz.type";
 
-// export type checkAnswerType = {
-//     option:OptionsType,arrayIndex:number,score:number
-// }
 export type ContextValuesType = {
 	state: initialStateType,
     checkAnswer: (optionID:Answer | undefined) =>any,
-    // checkAnswer: (option:OptionsType) =>any,
     nextQuestion:(arrayIndex:number,quizLength:number) =>any,
     prevQuestion:(arrayIndex:number,quizLength:number) =>any,
     setScore : (confirmedAnswer:Answer[],currentQuiz:QuestionType[])=>any,
-    setConfirmedAnswer:(questionId:string,optionId:string,confirmedAnswer:Answer[],question:QuestionType) =>any
-	// dataDispatch: ({type,payload}:{type:string,payload:any}) => React.Dispatch<any>;
+    setConfirmedAnswer:(questionId:string,optionId:string,confirmedAnswer:Answer[],question:QuestionType) =>any,
+	setQuizDetails:(quizQuestions:QuestionType[],quizTitle:string)=>any,
 	dataDispatch:  React.Dispatch<ACTONTYPE>;
 
 };
@@ -29,22 +25,23 @@ export const DataProvider:React.FC =({children})=>{
 
     const setScore = (confirmedAnswer:Answer[],currentQuiz:QuestionType[])=>{
         let sum = 0;
+        let noCorrect = 0;
     currentQuiz.forEach((item) => {
         const answer = confirmedAnswer.filter(
           (answerItem) => answerItem.questionId === item.id
         );
         const options = item.options.filter(el=>el.isRight===true)
         if (answer.length > 0) {
-        //   let optionId = getCorrectOption(item);
           if (answer[0].optionId === options[0].id) {
             sum += 10;
-            
+            noCorrect +=1;
           } else {
             sum -= 5;
           }
         }
       console.log(sum)
         dataDispatch({type:"SET_SCORE",payload:sum})
+        dataDispatch({type:"SET_NO_CORRECT_ANSWER",payload:noCorrect})
       });
     }
 
@@ -72,6 +69,10 @@ export const DataProvider:React.FC =({children})=>{
         dataDispatch({type:"SET_CONFIRMED_ANSWER",payload:newAnswerArray})
         
     }
+    const setQuizDetails=(quizQuestions:QuestionType[],quizTitle:string)=>{
+        dataDispatch({type:"SET_CURRENT_QUIZ",payload:quizQuestions})
+        dataDispatch({type:"SET_QUIZ_TITLE",payload:quizTitle})
+    }
     
     return(
         <DataContext.Provider value={{
@@ -81,6 +82,7 @@ export const DataProvider:React.FC =({children})=>{
             nextQuestion,
             prevQuestion,
             setConfirmedAnswer,
+            setQuizDetails,
             dataDispatch
         }}>
             {children}

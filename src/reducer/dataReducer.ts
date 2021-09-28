@@ -1,4 +1,3 @@
-// import { questionProps } from "../components/question/question.prop"
 import { Answer, QuestionType } from "../types/quiz.type"
 
 export const initialState:initialStateType = {
@@ -7,9 +6,9 @@ export const initialState:initialStateType = {
     arrayIndex:0,
     status:"starting" as statusState,
     selectedAnswer: "",
-    // selectedAnswer: {questionId:"",optionId:""},
-    // selectedAnswer: {text:"",isRight:false,id:""},
-    confirmedAnswer:[]
+    quizTitle:"",
+    confirmedAnswer:[],
+    noOfCorrect:0
 }
 export type statusState= "starting" | "playing" | "completed"
 
@@ -19,46 +18,37 @@ export type initialStateType = {
     arrayIndex:number,
     status:statusState,
     selectedAnswer: string ,
-    // selectedAnswer: Answer | undefined,
-    // selectedAnswer: OptionsType,
-    confirmedAnswer:Answer[]
+    quizTitle:string,
+    confirmedAnswer:Answer[],
+    noOfCorrect:number
 }
-
 export type ACTONTYPE = 
-| {type:"INCREMENT_SCORE",payload:number}
-| {type:"DECREMENT_SCORE",payload:number}
+| {type:"SET_QUIZ_TITLE",payload:string}
 | {type:"SET_SCORE",payload:number}
 | {type:"SET_ARRAY_INDEX",payload:number}
 | {type:"INCREMENT_QUESTION",payload:number}
 | {type:"DECREMENT_QUESTION",payload:number}
+| {type:"SET_NO_CORRECT_ANSWER",payload:number}
 | {type:"CHANGE_STATUS",payload:statusState}
 | {type:"SET_CURRENT_QUIZ",payload:QuestionType[]}
-// | {type:"SET_SELECTED_ANSWER",payload:Answer | undefined}
 | {type:"SET_SELECTED_ANSWER",payload:string }
-// | {type:"SET_SELECTED_ANSWER",payload:OptionsType}
 | {type:"SET_CONFIRMED_ANSWER",payload:Answer[]}
 
-// | {type:"INCREMENT_QUESTION",payload:number}
 
 export function reducer  (state: initialStateType,actions : ACTONTYPE) : initialStateType {
     switch(actions.type){
-        case "INCREMENT_SCORE": return{
-            ...state,score:actions.payload+1
-        }
-        case "DECREMENT_SCORE": return {
-            ...state,score:actions.payload-1
-        }
+        
         case "SET_SCORE": return {
             ...state,score:actions.payload
+        }
+        case "SET_QUIZ_TITLE": return {
+            ...state,quizTitle:actions.payload
         }
         case "INCREMENT_QUESTION":return{
             ...state,arrayIndex: actions.payload+1
         }
         case "DECREMENT_QUESTION":return{
             ...state,arrayIndex: actions.payload-1
-        }
-        case "CHANGE_STATUS":return{
-            ...state,status:actions.payload
         }
         case "SET_ARRAY_INDEX":return{
             ...state,arrayIndex:actions.payload
@@ -67,7 +57,6 @@ export function reducer  (state: initialStateType,actions : ACTONTYPE) : initial
             ...state,selectedAnswer:actions.payload
         }
         case "SET_CURRENT_QUIZ":{
-            // console.log(actions.payload)
             return{
             ...state,
             currentQuiz:actions.payload,
@@ -79,6 +68,13 @@ export function reducer  (state: initialStateType,actions : ACTONTYPE) : initial
                 confirmedAnswer:actions.payload
             }
         }
-        default:throw new Error()
+        case "SET_NO_CORRECT_ANSWER":{
+            return{
+                ...state,noOfCorrect:actions.payload
+            }
+        }
+        default:{
+            return state;
+        }
     }
 }

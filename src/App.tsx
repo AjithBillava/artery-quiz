@@ -11,8 +11,8 @@ function App() {
 
   return (
     <div className="App">
-      <Header score={score} username={"Ajith"} />
       <Router>
+      <Header score={score} username={"Ajith"} />
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/quiz/:quizID" exact component={QuestionPage} />

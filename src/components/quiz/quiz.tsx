@@ -8,18 +8,17 @@ export const Quiz =() =>{
     const{dataDispatch}=useData()
 
     useEffect(()=>{
-        const emptyAnswer:Answer[]=[{questionId:"",optionId:""}]
-
-        // setConfirmedAnswer("","",emptyAnswer,)
+        const emptyAnswer:Answer[]=[]
         dataDispatch({type:"SET_CONFIRMED_ANSWER",payload:emptyAnswer})
+        dataDispatch({type:"SET_SCORE",payload:0})
     },[])
     return(
-        <>
+        <div className="flex justify-around mt-8">
             {
                 quizOne.map(quiz=>(
                     <QuizThumbnail key={quiz.id} item={quiz}/>
                 ))
             }
-        </>
+        </div>
     )
 }
