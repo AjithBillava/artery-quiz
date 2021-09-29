@@ -8,7 +8,8 @@ export const initialState:initialStateType = {
     selectedAnswer: "",
     quizTitle:"",
     confirmedAnswer:[],
-    noOfCorrect:0
+    noOfCorrect:0,
+    showInstructions:true
 }
 export type statusState= "starting" | "playing" | "completed"
 
@@ -20,7 +21,8 @@ export type initialStateType = {
     selectedAnswer: string ,
     quizTitle:string,
     confirmedAnswer:Answer[],
-    noOfCorrect:number
+    noOfCorrect:number,
+    showInstructions:boolean
 }
 export type ACTONTYPE = 
 | {type:"SET_QUIZ_TITLE",payload:string}
@@ -32,6 +34,7 @@ export type ACTONTYPE =
 | {type:"CHANGE_STATUS",payload:statusState}
 | {type:"SET_CURRENT_QUIZ",payload:QuestionType[]}
 | {type:"SET_SELECTED_ANSWER",payload:string }
+| {type:"SET_SHOW_INSRTUCTIONS",payload:boolean }
 | {type:"SET_CONFIRMED_ANSWER",payload:Answer[]}
 
 
@@ -66,6 +69,12 @@ export function reducer  (state: initialStateType,actions : ACTONTYPE) : initial
             return{
                 ...state,
                 confirmedAnswer:actions.payload
+            }
+        }
+        case "SET_SHOW_INSRTUCTIONS":{
+            return {
+                ...state,
+                showInstructions:actions.payload
             }
         }
         case "SET_NO_CORRECT_ANSWER":{

@@ -5,12 +5,13 @@ import {Answer} from "../../types/quiz.type"
 import { QuizThumbnail } from "../quizThumbnail/quizThumbnail"
 
 export const Quiz =() =>{ 
-    const{dataDispatch}=useData()
+    const{dataDispatch,setShowInstructions}=useData()
 
     useEffect(()=>{
         const emptyAnswer:Answer[]=[]
         dataDispatch({type:"SET_CONFIRMED_ANSWER",payload:emptyAnswer})
         dataDispatch({type:"SET_SCORE",payload:0})
+        setShowInstructions(true)
     },[])
     return(
         <div className="flex justify-around mt-8">

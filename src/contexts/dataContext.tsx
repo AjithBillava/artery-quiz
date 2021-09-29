@@ -11,7 +11,7 @@ export type ContextValuesType = {
     setConfirmedAnswer:(questionId:string,optionId:string,confirmedAnswer:Answer[],question:QuestionType) =>any,
 	setQuizDetails:(quizQuestions:QuestionType[],quizTitle:string)=>any,
 	dataDispatch:  React.Dispatch<ACTONTYPE>;
-
+    setShowInstructions : (showInstruction:boolean) =>any
 };
 
 export const DataContext = createContext<ContextValuesType> ({} as ContextValuesType )
@@ -31,15 +31,16 @@ export const DataProvider:React.FC =({children})=>{
           (answerItem) => answerItem.questionId === item.id
         );
         const options = item.options.filter(el=>el.isRight===true)
+        console.log(options)
         if (answer.length > 0) {
           if (answer[0].optionId === options[0].id) {
             sum += 10;
             noCorrect +=1;
           } else {
-            sum -= 5;
+            sum -= 2;
           }
         }
-      console.log(sum)
+      
         dataDispatch({type:"SET_SCORE",payload:sum})
         dataDispatch({type:"SET_NO_CORRECT_ANSWER",payload:noCorrect})
       });
@@ -73,7 +74,9 @@ export const DataProvider:React.FC =({children})=>{
         dataDispatch({type:"SET_CURRENT_QUIZ",payload:quizQuestions})
         dataDispatch({type:"SET_QUIZ_TITLE",payload:quizTitle})
     }
-    
+    const setShowInstructions = (showInstruction:boolean) =>{
+        dataDispatch({type:"SET_SHOW_INSRTUCTIONS",payload:showInstruction})
+    }
     return(
         <DataContext.Provider value={{
             state,
@@ -83,6 +86,7 @@ export const DataProvider:React.FC =({children})=>{
             prevQuestion,
             setConfirmedAnswer,
             setQuizDetails,
+            setShowInstructions,
             dataDispatch
         }}>
             {children}

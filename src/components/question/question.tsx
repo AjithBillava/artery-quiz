@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import { Link } from "react-router-dom"
+import { Link,Redirect } from "react-router-dom"
 import { useData } from "../../contexts/dataContext"
 import { QuestionType } from "../../types/quiz.type"
 
@@ -10,9 +10,7 @@ export function Question ({questions,selectedOption}:{questions:QuestionType,sel
 
 const {state:{arrayIndex,currentQuiz,confirmedAnswer,score},prevQuestion ,nextQuestion,setConfirmedAnswer,setScore} = useData()
 const quizLength = currentQuiz.length
-useEffect(()=>{
-    console.log(`${confirmedAnswer} confirm`)
-},[confirmedAnswer])
+
 const btnStyle= "mx-1 xsm:m-2 p-2 xsm:px-4 rounded hover:shadow-lg "
     return(
         <div >
@@ -80,12 +78,13 @@ const btnStyle= "mx-1 xsm:m-2 p-2 xsm:px-4 rounded hover:shadow-lg "
 
                 </div>
                 :
-                <div>
-                    The quiz is ended  
-                    <Link to="/result" replace
-                    className={`${btnStyle} bg-red`}
-                    >finish</Link>
-                </div>
+                // <div>
+                //     The quiz is ended  
+                //     <Link to="/result" replace
+                //     className={`${btnStyle} bg-red`}
+                //     >finish</Link>
+                // </div>||
+                <Redirect to="/"/>
             }
         </div>
     )
