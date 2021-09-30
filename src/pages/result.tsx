@@ -66,7 +66,7 @@ export const Result = () =>{
                             <div key={item.id}
                             className="flex flex-col mb-8" >
                                 <p className="flex justify-center font-bold mt-4">
-                                    {item.question}?
+                                    {item.question}
                                 </p>
                                 
                                 {

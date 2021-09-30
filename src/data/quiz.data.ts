@@ -143,7 +143,7 @@ export const quizOne : QuizType[]= [
                     {
                         id:v4(),
                         text:"Gujrat",
-                        isRight:true        
+                        isRight:false        
                     },
                     {
                         id:v4(),
