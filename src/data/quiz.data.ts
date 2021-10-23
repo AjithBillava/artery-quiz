@@ -5,6 +5,7 @@ export const quizOne : QuizType[]= [
     {
         id:v4(),
         quizName:"Art and Culture",
+        imageURL:"https://images.hindustantimes.com/rf/image_size_960x540/HT/p2/2016/12/28/Pictures/jewel-in-the-crown_d6a83268-ccef-11e6-b3cb-dcd306bf19b8.JPG",
         questions:[
             {
                 id:v4(),
@@ -167,6 +168,7 @@ export const quizOne : QuizType[]= [
     {
         id:v4(),
         quizName:"Indian History",
+        imageURL:"http://indiafacts.org/wp-content/uploads/2015/03/hampi.jpg",
         questions:[
             {
                 id:v4(),

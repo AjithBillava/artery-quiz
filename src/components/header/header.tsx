@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import {headerProps} from "./header.props"
-export const Header = ({username,score}:headerProps) =>{
+export const Header = ({firstname,lastname,score}:headerProps) =>{
 
     // useEffect(()=>{
     //     setScore(confirmedAnswer,currentQuiz)
@@ -15,7 +15,7 @@ export const Header = ({username,score}:headerProps) =>{
                     <p>score:{score}</p>
                 </div> */}
                     {/* <p>score:{score}</p> */}
-                <p className="bg-primaryColor-light text-black rounded-full h-10 w-10 flex items-center justify-center">{username.charAt(0)}</p>
+                <p className="bg-primaryColor-light text-lg md:text-xl text-black rounded-full h-10 w-10 flex items-center justify-center">{firstname.charAt(0).toUpperCase()}{lastname.charAt(0).toUpperCase()}</p>
             </nav>
         </>
     )

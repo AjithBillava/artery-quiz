@@ -1,4 +1,5 @@
 export type headerProps = {
-    username:string,
+    firstname:string,
+    lastname:string,
     score:number
 }

@@ -13,6 +13,7 @@ export type QuestionType={
 export type QuizType = {
     id: any,
     quizName: string,
+    imageURL: string,
     questions : QuestionType[]
 }
 
