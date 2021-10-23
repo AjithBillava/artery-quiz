@@ -14,12 +14,15 @@ export const Quiz =() =>{
         setShowInstructions(true)
     },[])
     return(
-        <div className="flex flex-col items-center sm:flex-row justify-around mt-8">
-            {
-                quizOne.map(quiz=>(
-                    <QuizThumbnail key={quiz.id} item={quiz}/>
-                ))
-            }
+        <div className="flex flex-col items-center justify-around mt-4">
+            <h2 className="flex justify-center mb-4 font-semibold text-2xl md:text-3xl" >Quizes</h2>
+            <div className="flex flex-col items-center sm:flex-row justify-around">
+                {
+                    quizOne.map(quiz=>(
+                        <QuizThumbnail key={quiz.id} item={quiz}/>
+                    ))
+                }
+            </div>
         </div>
     )
 }
