@@ -14,7 +14,7 @@ export const Quiz =() =>{
         setShowInstructions(true)
     },[])
     return(
-        <div className="flex justify-around mt-8">
+        <div className="flex flex-col items-center sm:flex-row justify-around mt-8">
             {
                 quizOne.map(quiz=>(
                     <QuizThumbnail key={quiz.id} item={quiz}/>
